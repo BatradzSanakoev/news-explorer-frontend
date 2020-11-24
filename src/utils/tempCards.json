@@ -1,0 +1,49 @@
+{
+    "articles": [
+        {
+            "id": "1",
+            "author": "Guest Author",
+            "title": "What Are CopyPortfolios?",
+            "description": "There’s plenty of people out there fascinated by the stock market (and making some money) who prefer to invest their funds in diversified portfolios. Beats doing all the work and it involves way less risk, right? What if you wanted to dabble in crypto with th…",
+            "url": "https://www.newsbtc.com/etoro/what-are-copyportfolios/",
+            "urlToImage": "https://www.newsbtc.com/wp-content/uploads/2020/11/etoro-copyportfolio.jpg",
+            "publishedAt": "2020-11-11T06:26:55Z"
+        },
+        {
+            "id": "2",
+            "author": "Cointelegraph By Cyrus McNally",
+            "title": "Bitcoin fees plummet as mempool clears to zero",
+            "description": "The Bitcoin mempool cleared to zero this week, making it possible to get transactions confirmed in the upcoming block for 3 sat/byte fees, for the first time since mid-October.",
+            "url": "https://cointelegraph.com/news/bitcoin-fees-plummet-as-mempool-clears-to-zero",
+            "urlToImage": "https://s3.cointelegraph.com/uploads/2020-11/557458a4-d689-4b87-af30-3d2904b0cdc6.jpg",
+            "publishedAt": "2020-11-11T04:55:08Z"
+        },
+        {
+            "id": "3",
+            "author": "CBS News",
+            "title": "Inside the FBI's search for the dark web kingpin of Silk Road",
+            "description": "\"Silk Road was the Amazon of drug sites,\" says FBI special agent",
+            "url": "https://www.cbsnews.com/news/ross-ulbricht-dread-pirate-roberts-silk-road-fbi/",
+            "urlToImage": "https://cbsnews1.cbsistatic.com/hub/i/r/2020/11/11/1ec3b073-998b-4d25-ac5e-767479e8b5c8/thumbnail/1200x630/8a9a7a17e2d81eaf828c65ec4105d01d/fbi-ulbricht.jpg",
+            "publishedAt": "2020-11-11T04:03:11Z"
+        },
+        {
+            "id": "4",
+            "author": "No Author",
+            "title": "Biden Will Have the Most Diverse, Intersectional Cabinet of Mass Murderers Ever Assembled",
+            "description": "Well you’ll be happy to know that the next US president and his crack team of ventriloquists are assembling a cabinet of mass murderers that’s as diverse, inclusive and intersectional as America herself. It’s been obvious for a long time that Joe Biden’s cabi…",
+            "url": "https://www.lewrockwell.com/2020/11/no_author/biden-will-have-the-most-diverse-intersectional-cabinet-of-mass-murderers-ever-assembled/",
+            "urlToImage": "https://www.lewrockwell.com/wp-content/themes/lrc/images/logo-med.png",
+            "publishedAt": "2020-11-11T04:01:00Z"
+        },
+        {
+            "id": "5",
+            "author": "Aayush Jindal",
+            "title": "TA: Bitcoin Trades Near Crucial Juncture, Why 100 SMA Is The Key",
+            "description": "Bitcoin price is facing a strong resistance near $15,500 and $15,600 against the US Dollar. BTC could clear the $15,500 resistance unless there is a clear break below the 100 hourly SMA. Bitcoin is facing a strong barrier near the $15,500 and $15,600 resistan…",
+            "url": "https://www.newsbtc.com/analysis/btc/bitcoin-trading-near-crucial-juncture/",
+            "urlToImage": "https://www.newsbtc.com/wp-content/uploads/2020/11/shutterstock_173627021.jpg",
+            "publishedAt": "2020-11-11T03:48:09Z"
+        }
+    ]
+}

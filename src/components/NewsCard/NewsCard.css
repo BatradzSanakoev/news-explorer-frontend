@@ -1,0 +1,246 @@
+.news__card {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5%;
+    height: 576px;
+}
+
+.news__card-cover {
+    position: relative;
+    width: 100%;
+    padding-bottom: 272px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.news__card-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+.news__card-info {
+    width: 100%;
+    height: 304px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px 24px;
+    box-sizing: border-box;
+}
+
+.news__card-date {
+    margin: 0;
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
+    align-items: center;
+    color: #B6BCBF;
+}
+
+.news__card-title {
+    margin: 12px 0 0;
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.news__card-description {
+    margin: 16px 0 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.news__card-source {
+    font-family: 'Roboto Slab';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #B6BCBF;
+    margin: 18px 0 0;
+}
+
+.news__card-bookmark {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border-radius: 8px;
+    z-index: 1;
+    transition: all .7s ease;
+}
+
+.news__card-bookmark:hover {
+    cursor: pointer;
+    opacity: .8;
+    transition: all .7s ease;
+}
+
+.news__card-auth-warning {
+    position: absolute;
+    top: 24px;
+    right: 69px;
+    z-index: 1;
+    background-color: #ffffff;
+    height: 40px;
+    width: 182px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all .7s ease;
+}
+
+.news__card-auth-warning-name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+.news__card-auth-warning:hover {
+    cursor: pointer;
+    opacity: .8;
+    transition: all .7s ease;
+}
+
+.news__card-auth-tag {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    z-index: 1;
+    background-color: #ffffff;
+    height: 40px;
+    width: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    transition: all .7s ease;
+}
+
+.news__card-auth-tag-name {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    margin: 0;
+}
+
+.news__card-auth-tag:hover {
+    cursor: pointer;
+    opacity: .8;
+    transition: all .7s ease;
+}
+
+.news__card-visible {
+    display: none;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .news__card {
+        height: 420px;
+    }
+
+    .news__card-info {
+        height: 270px;
+    }
+
+    .news__card-bookmark {
+        top: 8px;
+        right: 8px;
+    }
+
+    .news__card-auth-warning {
+        top: 8px;
+        right: 52px;
+        width: 105px;
+    }
+
+    .news__card-cover {
+        padding-bottom: 150px;
+    }
+
+    .news__card-title {
+        font-size: 22px;
+        line-height: 24px;
+    }
+
+    .news__card-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .news__card-auth-tag {
+        left: 8px;
+        top: 8px;
+        width: 28%;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .news__card {
+        height: 440px;
+    }
+
+    .news__card-info {
+        height: 244px;
+    }
+
+    .news__card-cover {
+        padding-bottom: 196px;
+    }
+
+    .news__card-title {
+        font-size: 22px;
+        line-height: 26px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .news__card-description {
+        font-size: 16px;
+        line-height: 22px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .news__card-bookmark {
+        top: 16px;
+        right: 16px;
+    }
+
+    .news__card-auth-warning {
+        top: 16px;
+    }
+}
