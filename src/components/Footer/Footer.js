@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer className='footer'>
             <div className='footer__container'>
-                <p className='footer__copyright'>© 2020 Supersite, Powered by News API</p>
+                <p className='footer__copyright'>©2020 Supersite, Powered by News API</p>
                 <nav className='footer__nav'>
                     <div className='footer__links'>
                         <a href='/' className='footer__link'>Главная</a>
