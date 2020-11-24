@@ -3,4 +3,4 @@
 - Прелоудер скрыт, чтобы отобразить его необходимо в файле Preloader.js для родительской секции убрать из списка классов preloader__visible.
 - Также как и во втором пункте чисто демонстрационный характер носят и различные значки новостных карточек (для демонстрации верстки).
 - Данные карточек взяты прямо из NewsApi (первые 5 поавшихся карточек), данные которых перенес в файл tempCards.json в папке utils.
-- ссылка на gh pages https://BatradzSanakoev.github.io/news-explorer-frontend
+- ссылка на gh pages https://BatradzSanakoev.github.io/news-explorer-frontend/
