@@ -3,7 +3,7 @@ import EscapeOutside from 'react-escape-outside';
 
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-export default function Login({ isOpen, onClose, changePopup }) {
+export default function Login({ isOpen, onClose, changePopup, handleLogin }) {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -19,6 +19,7 @@ export default function Login({ isOpen, onClose, changePopup }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        handleLogin(email, password);
         onClose();
         resetFrom();
     };

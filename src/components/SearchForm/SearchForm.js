@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchForm() {
+export default function SearchForm({ handleSendRequest }) {
 
     const [request, setRequest] = React.useState('');
 
@@ -10,6 +10,7 @@ export default function SearchForm() {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        handleSendRequest(request);
         setRequest('');
     };
 

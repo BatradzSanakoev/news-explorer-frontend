@@ -23,6 +23,7 @@
 
 .main__form-input {
     border: none;
+    outline: none;;
     /* width: 462px; */
     width: 66%;
     height: 64px;
@@ -48,8 +49,7 @@
 }
 
 .main__form-input:hover {
-    cursor: pointer;
-    /* box-shadow: -2px 2px 2px 2px black; */
+    cursor: text;
     transition: all .7s ease;
 }
 

@@ -3,7 +3,7 @@ import EscapeOutside from 'react-escape-outside';
 
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-export default function Register({ isOpen, onClose, changePopup }) {
+export default function Register({ isOpen, onClose, changePopup, handleRegister }) {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -23,6 +23,7 @@ export default function Register({ isOpen, onClose, changePopup }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        handleRegister(email, password, name);
         onClose();
         resetFrom();
     };
@@ -47,7 +48,7 @@ export default function Register({ isOpen, onClose, changePopup }) {
                         <input type='text' required className='popup__input' placeholder='Введите имя' name='name' value={name || ''} onChange={handleChange} />
                         <span className={`popup__form-error-text ${name && 'popup__form-error-text_visible'}`}>{!name ? 'Неправильный формат name' : ''}</span>
                         <p className={`popup__form-error-text ${email && 'popup__form-error-text_visible'} popup__form-error-text_register`}>Такой пользователь уже есть</p>
-                        <button type='submit' className='popup__button popup__button_register' disabled={!email || !password}>Войти</button>
+                        <button type='submit' className='popup__button popup__button_register' disabled={!email || !password}>Зарегистрироваться</button>
                     </fieldset>
                     <p className='popup__down-text'>или <span className='popup__span-text' onClick={changePopup}>Войти</span></p>
                 </form>
