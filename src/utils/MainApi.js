@@ -68,8 +68,7 @@ export const getArticles = () => {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            'Content-Type': 'application/json'
         },
         credentials: 'include'
     })
@@ -84,8 +83,7 @@ export const createArticle = (article) => {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            'Content-Type': 'application/json'
         },
         credentials: 'include',
         body: JSON.stringify({ keyword, title, text, date, source: source.name, link, image })
@@ -101,8 +99,7 @@ export const deleteArticle = (article_id) => {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+            'Content-Type': 'application/json'
         },
         credentials: 'include'
     })

@@ -36,6 +36,7 @@ function App() {
   const [isSearchError, setIsSearchError] = React.useState(false);
   const [isSearchZero, setIsSearchZero] = React.useState(false);
   const [keyword, setKeyword] = React.useState('');
+  const [keywords, setKeywords] = React.useState({});
   const [addedArticles, setAddedArticles] = React.useState([]);
 
   const onClose = () => {
@@ -98,6 +99,7 @@ function App() {
       .then(() => {
         setLoggedIn(false);
         setCurrentUser({});
+        // setIsSearchComplete(false);
         history.push('/');
       });
   };
@@ -130,6 +132,7 @@ function App() {
         setNews(res.articles);
         setIsSearchLoading(false);
         setIsSearchComplete(true);
+        setNewsRow(0);
       })
       .catch((err) => {
         console.log(err);
@@ -165,15 +168,26 @@ function App() {
         .catch((err) => console.log(err));
     } else {
       MainApi.deleteArticle(savedArticle._id)
-        .then(() => setAddedArticles(addedArticles.filter((articles) => articles.id !== articleReq.id)))
+        .then(() => setAddedArticles(addedArticles.filter((articles) => articles._id !== savedArticle._id)))
         .catch((err) => console.log(err));
     }
   };
 
   React.useEffect(() => {
-    MainApi.getArticles()
+    loggedIn && MainApi.getArticles()
       .then((res) => res && setAddedArticles(res));
-  }, []);
+  }, [currentUser]);
+
+  React.useEffect(() => {
+    loggedIn && MainApi.getArticles()
+      .then((res) => {
+        if (res) {
+          const savedKeywords = addedArticles.map((item) => keywordEdit(item.keyword));
+          localStorage.setItem('keywords', JSON.stringify(savedKeywords));
+          setKeywords(savedKeywords);
+        }
+      });
+  }, [addedArticles]);
 
   const keywordEdit = (word) => {
     let newWord = '';
@@ -182,10 +196,6 @@ function App() {
     }
     return newWord.replace(/ /gi, '');
   };
-
-  React.useEffect(() => {
-    console.log(addedArticles);
-}, [addedArticles]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -248,6 +258,11 @@ function App() {
             isBurgerOpen={isBurgerOpen}
             isLogPopupOpen={isLogPopupOpen}
             isRegPopupOpen={isRegPopupOpen}
+            news={news}
+            addedArticles={addedArticles}
+            keywords={keywords}
+            handleSignout={handleSignout}
+            articleAddAndRemove={articleAddAndRemove}
           />
 
           {/* <Route path='/saved-news'>
