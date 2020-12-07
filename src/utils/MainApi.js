@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
-// const BASE_URL = 'https://sb13.students.nomoreparties.xyz';
+const BASE_URL = 'https://api.sb13diploma.students.nomoreparties.xyz';
 
-const BASE_URL = 'http://localhost:3001';
+// const BASE_URL = 'http://localhost:3001';
 
 export const register = (email, password, name) => {
     return fetch(`${BASE_URL}/signup`, {
