@@ -3,11 +3,11 @@ import React from 'react';
 
 import News from '../../utils/tempCards.json';
 
-export default function SavedNewsHeader({ news, username, addedArticles, location, keywords }) {
+export default function SavedNewsHeader({ news, username, addedArticles, location }) {
 
     const tagsListToShow = () => {
         let showingTagsObj = {};
-        const tagsNum = keywords.reduce((acc, n) => (acc[n] = (acc[n] || 0) + 1, acc), {});
+        const tagsNum = JSON.parse(localStorage.getItem('keywords')).reduce((acc, n) => (acc[n] = (acc[n] || 0) + 1, acc), {});
         const sortedTagsList = Object.keys(tagsNum).sort((a, b) => tagsNum[b] - tagsNum[a]);
         const result = sortedTagsList.length <= 3 ? showingTagsObj = { showingTags: sortedTagsList.join(', '), numOfAnotherTags: 0 }
             : { showingTags: sortedTagsList.slice(0, 2).join(', '), numOfAnotherTags: sortedTagsList.length - 2 };

@@ -13,6 +13,7 @@ import Register from '../Register/Register';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SavedNewsPage from '../SavedNewsPage/SavedNewsPage';
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 
 import MainApi from '../../utils/MainApi';
 import NewsApi from '../../utils/NewsApi';
@@ -22,13 +23,14 @@ function App() {
   const location = useLocation();
   const history = useHistory();
 
+  //Стейт переменнык
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [username, setUsername] = React.useState('');
   const [news, setNews] = React.useState([]);
   const [isLogPopupOpen, setIsLogPopupOpen] = React.useState(false);
   const [isRegPopupOpen, setIsRegPopupOpen] = React.useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = React.useState(false);
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = React.useState(false);
   const [newsRow, setNewsRow] = React.useState(0);
   const [isSearchComplete, setIsSearchComplete] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
@@ -36,12 +38,19 @@ function App() {
   const [isSearchError, setIsSearchError] = React.useState(false);
   const [isSearchZero, setIsSearchZero] = React.useState(false);
   const [keyword, setKeyword] = React.useState('');
-  const [keywords, setKeywords] = React.useState({});
   const [addedArticles, setAddedArticles] = React.useState([]);
+  const [regError, setRegError] = React.useState(false);
+  const [authError, setAuthError] = React.useState(false);
+
+
+  // Методы работы с попапами и Бургер меню
 
   const onClose = () => {
+    setRegError(false);
+    setAuthError(false);
     setIsLogPopupOpen(false);
     setIsRegPopupOpen(false);
+    setIsInfoToolTipOpen(false);
   };
 
   const openLogPopup = () => {
@@ -50,6 +59,10 @@ function App() {
 
   const openRegPopup = () => {
     setIsRegPopupOpen(true);
+  };
+
+  const openInfoPopup = () => {
+    setIsInfoToolTipOpen(true);
   };
 
   const changePopup = (evt) => {
@@ -61,57 +74,53 @@ function App() {
     setIsBurgerOpen(!isBurgerOpen);
   };
 
-  React.useEffect(() => {
-    MainApi.getUser()
-      .then((res) => {
-        if (!res) return Promise.reject('Unauthorized');
-        setLoggedIn(true);
-        setCurrentUser(res);
-        setUsername(res.name);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  //Методы работы с API регистрации, авторизации, разлогинирования, загрузки, сохранения и удаления статей
 
+  //Авторизация пользователя
   const handleLogin = (email, password) => {
     MainApi.authorize(email, password)
       .then(() => {
         MainApi.getUser()
           .then((res) => {
-            setCurrentUser(res.data);
-            setUsername(res.name);
+            setCurrentUser(res);
+            onClose();
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            setAuthError(true);
+          });
         setLoggedIn(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setAuthError(true);
+      });
   };
 
+  //Регистрация пользователя
   const handleRegister = (email, password, name) => {
     MainApi.register(email, password, name)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        onClose();
+        openInfoPopup();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setRegError(true);
+      });
   };
 
+  //Разлогинирование пользователя
   const handleSignout = () => {
     MainApi.signOut()
       .then(() => {
         setLoggedIn(false);
         setCurrentUser({});
-        // setIsSearchComplete(false);
         history.push('/');
       });
   };
 
-  React.useEffect(() => {
-    if (JSON.parse(localStorage.getItem('news'))) {
-      setIsSearchComplete(true);
-      setNews(JSON.parse(localStorage.getItem('news')));
-      setKeyword(JSON.parse(localStorage.getItem('keyword')));
-    } else localStorage.removeItem('news');
-  }, []);
-
+  //Поиск новостей
   const handleSendRequest = (request) => {
     setNews([]);
     setIsSearching(true);
@@ -145,10 +154,7 @@ function App() {
       });
   };
 
-  const showMoreNewsButton = () => {
-    setNewsRow(newsRow + 1);
-  };
-
+  //Сохранение и удаление карточки
   const articleAddAndRemove = (article) => {
     const articleReq = {
       keyword: article.keyword,
@@ -173,22 +179,14 @@ function App() {
     }
   };
 
-  React.useEffect(() => {
-    loggedIn && MainApi.getArticles()
-      .then((res) => res && setAddedArticles(res));
-  }, [currentUser]);
+  //Другие вспомогательные методы
 
-  React.useEffect(() => {
-    loggedIn && MainApi.getArticles()
-      .then((res) => {
-        if (res) {
-          const savedKeywords = addedArticles.map((item) => keywordEdit(item.keyword));
-          localStorage.setItem('keywords', JSON.stringify(savedKeywords));
-          setKeywords(savedKeywords);
-        }
-      });
-  }, [addedArticles]);
+  //Отображение большего числа карточек
+  const showMoreNewsButton = () => {
+    setNewsRow(newsRow + 1);
+  };
 
+  //Приведение к общему виду темы поиска для отображения в тегах
   const keywordEdit = (word) => {
     let newWord = '';
     for (let i = 0; i < word.length; i++) {
@@ -197,11 +195,57 @@ function App() {
     return newWord.replace(/ /gi, '');
   };
 
+  //Эффекты
+
+  //Авторизация при загрузке страницы
+  React.useEffect(() => {
+    MainApi.getUser()
+      .then((res) => {
+        if (!res) return Promise.reject('Unauthorized');
+        setLoggedIn(true);
+        setCurrentUser(res);
+        location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  //Загрузка последних найденных новостей при загрузке страницы
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('news'))) {
+      setIsSearchComplete(true);
+      setNews(JSON.parse(localStorage.getItem('news')));
+      setKeyword(JSON.parse(localStorage.getItem('keyword')));
+    } else localStorage.removeItem('news');
+  }, []);
+
+  //Запись сохраненных новостей в стейт переменную 
+  React.useEffect(() => {
+    loggedIn && MainApi.getArticles()
+      .then((res) => res && setAddedArticles(res));
+  }, [currentUser]);
+
+  //Запись ключевых слов поиска в локальное хранилище
+  React.useEffect(() => {
+    loggedIn && MainApi.getArticles()
+      .then((res) => {
+        if (res) {
+          const savedKeywords = addedArticles.map((item) => keywordEdit(item.keyword));
+          localStorage.setItem('keywords', JSON.stringify(savedKeywords));
+        }
+      });
+  }, [addedArticles]);
+
+  //Редирект на Главную при попытке попасть на страницу Сохраненных карточек без авторизации
+  React.useEffect(() => {
+    (!loggedIn && location.pathname === '/saved-news') && openLogPopup();
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
-      <Login isOpen={isLogPopupOpen} onClose={onClose} changePopup={changePopup} handleLogin={handleLogin} />
-      <Register isOpen={isRegPopupOpen} onClose={onClose} changePopup={changePopup} handleRegister={handleRegister} />
+      <Login isOpen={isLogPopupOpen} onClose={onClose} changePopup={changePopup} handleLogin={handleLogin} authError={authError} />
+      <Register isOpen={isRegPopupOpen} onClose={onClose} changePopup={changePopup} handleRegister={handleRegister} regError={regError} />
+      <InfoToolTip isOpen={isInfoToolTipOpen} onClose={onClose} changePopup={changePopup} popupName='info' />
 
       <div className='page'>
         <Switch>
@@ -211,7 +255,6 @@ function App() {
             <div className='page__upside'>
               <Header
                 loggedIn={loggedIn}
-                username={username}
                 location={location}
                 openPopup={openLogPopup}
                 openBurger={openBurgerMenu}
@@ -251,7 +294,6 @@ function App() {
             path='/saved-news'
             component={SavedNewsPage}
             loggedIn={loggedIn}
-            username={username}
             location={location}
             openPopup={openLogPopup}
             openBurger={openBurgerMenu}
@@ -260,19 +302,10 @@ function App() {
             isRegPopupOpen={isRegPopupOpen}
             news={news}
             addedArticles={addedArticles}
-            keywords={keywords}
             handleSignout={handleSignout}
             articleAddAndRemove={articleAddAndRemove}
+            openRegPopup={openRegPopup}
           />
-
-          {/* <Route path='/saved-news'>
-            <div className='page__upside page__upside_auth'>
-              <Header loggedIn={loggedIn} username={username} location={location} openPopup={openLogPopup} openBurger={openBurgerMenu} isBurgerOpen={isBurgerOpen} isLogPopupOpen={isLogPopupOpen} isRegPopupOpen={isRegPopupOpen} />
-              <Main location={location} />
-            </div>
-            <NewsCardList location={location} />
-            <Footer />
-          </Route> */}
 
         </Switch>
       </div>

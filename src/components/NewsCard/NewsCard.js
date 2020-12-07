@@ -2,6 +2,7 @@ import React from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import Bookmark from '../../images/bookmark.png';
+import BookmarkOrigin from '../../images/bookmark-origin.png';
 import BlueBookmark from '../../images/blue-bookmark.png';
 import Recycle from '../../images/recycle.jpg';
 
@@ -42,11 +43,11 @@ export default function NewsCard({
             }
             <div className={`news__card-auth-warning ${!authWarningTip && 'news__card-visible'}`}>
                 <p className='news__card-auth-warning-name'>
-                    {location.pathname === '/' ? 'Войдите, чтобы сохранять статьи' : 'Убрать из сохранённыхs'}
+                    {location.pathname === '/' ? 'Войдите, чтобы сохранять статьи' : 'Убрать из сохранённых'}
                 </p>
             </div>
             <img
-                src={location.pathname === '/' ? (isAdded ? BlueBookmark : Bookmark) : Recycle}
+                src={location.pathname === '/' ? (loggedIn ? (isAdded ? BlueBookmark : BookmarkOrigin) : Bookmark) : Recycle}
                 alt='Card bookmark icon'
                 className='news__card-bookmark'
                 onClick={() => {
@@ -55,9 +56,11 @@ export default function NewsCard({
                 }}
                 onMouseEnter={() => {
                     !loggedIn && handleOnMouse();
+                    (loggedIn && location.pathname === '/saved-news') && handleOnMouse();
                 }}
                 onMouseLeave={() => {
                     !loggedIn && handleOnMouse();
+                    (loggedIn && location.pathname === '/saved-news') && handleOnMouse();
                 }}
             />
             <div className='news__card-cover'>

@@ -6,8 +6,10 @@ import Navigation from '../Navigation/Navigation';
 import BurgerButtonWhite from '../../images/menu-white.png';
 import BurgerButtonBlack from '../../images/menu-black.png';
 
-export default function Header({ loggedIn, username, location, openPopup, openBurger, isBurgerOpen, isLogPopupOpen, isRegPopupOpen, handleSignout }) {
+export default function Header({ loggedIn, location, openPopup, openBurger, isBurgerOpen, isLogPopupOpen, isRegPopupOpen, handleSignout }) {
+
     const savedNewsBurgerSrc = (location.pathname === '/saved-news' && !isBurgerOpen) ? BurgerButtonBlack : BurgerButtonWhite;
+
     return (
         <header className={`header ${location.pathname === '/saved-news' ? 'header_auth' : ''} ${isBurgerOpen && 'header_dark'}`}>
             <div className='header__container'>
@@ -15,7 +17,6 @@ export default function Header({ loggedIn, username, location, openPopup, openBu
                 <img className={`header__burger-button ${(isRegPopupOpen || isLogPopupOpen) && 'header__burger-button_visible'}`} src={`${location.pathname === '/' ? BurgerButtonWhite : savedNewsBurgerSrc}`} alt='Burger Menu Icon' onClick={openBurger} />
                 <Navigation
                     loggedIn={loggedIn} 
-                    username={username} 
                     location={location} 
                     openPopup={openPopup} 
                     isBurgerOpen={isBurgerOpen} 
