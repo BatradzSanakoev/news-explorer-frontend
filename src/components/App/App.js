@@ -206,7 +206,11 @@ function App() {
         setCurrentUser(res);
         location.pathname === '/saved-news' ? history.push('/saved-news') : history.push('/');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        location.pathname === '/saved-news' && history.push('/');
+        openLogPopup();
+      });
   }, []);
 
   //Загрузка последних найденных новостей при загрузке страницы
@@ -236,9 +240,9 @@ function App() {
   }, [addedArticles]);
 
   //Редирект на Главную при попытке попасть на страницу Сохраненных карточек без авторизации
-  React.useEffect(() => {
-    (!loggedIn && location.pathname === '/saved-news') && history.push('/') && openLogPopup();
-  }, []);
+  // React.useEffect(() => {
+  //   (!loggedIn && location.pathname === '/saved-news') && history.push('/') && openLogPopup();
+  // }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
