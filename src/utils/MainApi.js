@@ -7,8 +7,7 @@ export const register = (email, password, name) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json',
-            'Access-Control-Allow-Credentials': true,
+            'Content-type': 'application/json'
         },
         credentials: 'include',
         body: JSON.stringify({ email, password, name })
@@ -23,8 +22,7 @@ export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json',
-            'Access-Control-Allow-Credentials': true,
+            'Content-type': 'application/json'
         },
         credentials: 'include',
         body: JSON.stringify({ email, password })

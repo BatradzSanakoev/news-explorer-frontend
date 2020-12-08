@@ -237,7 +237,7 @@ function App() {
 
   //Редирект на Главную при попытке попасть на страницу Сохраненных карточек без авторизации
   React.useEffect(() => {
-    (!loggedIn && location.pathname === '/saved-news') && openLogPopup();
+    (!loggedIn && location.pathname === '/saved-news') && history.push('/') && openLogPopup();
   }, []);
 
   return (
