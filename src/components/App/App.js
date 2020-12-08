@@ -208,7 +208,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        location.pathname === '/saved-news' && history.push('/') && openLogPopup();
+        location.pathname === '/saved-news' && (history.push('/') && openLogPopup());
       });
   }, []);
 
